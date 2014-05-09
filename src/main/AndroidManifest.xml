@@ -56,6 +56,10 @@
             android:label="@string/title_notes"
             android:parentActivityName="com.martinez.winesoftheworld.Search" >
         </activity>
+        <activity android:name=".Views.WineResult"
+            android:label="Wine Details"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+            </activity>
     </application>
 
 </manifest>

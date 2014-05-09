@@ -1,6 +1,7 @@
 package com.martinez.winesoftheworld.SearchActivities;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +18,9 @@ import android.widget.Toast;
 
 import com.martinez.winesoftheworld.MainActivity;
 import com.martinez.winesoftheworld.R;
+import com.martinez.winesoftheworld.Search;
 import com.martinez.winesoftheworld.Views.WineListArrayAdapter;
+import com.martinez.winesoftheworld.Views.WineResult;
 import com.martinez.winesoftheworld.wines.Wine;
 import com.martinez.winesoftheworld.wines.WineControl;
 
@@ -104,6 +107,11 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(getApplicationContext(), "Clicked on: " + ((Wine) parent.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent( getApplicationContext(), WineResult.class );
+
+                intent.putExtra( "wine", (Wine) parent.getItemAtPosition(position));
+                startActivity(intent);
             }
         };
         return listener;
