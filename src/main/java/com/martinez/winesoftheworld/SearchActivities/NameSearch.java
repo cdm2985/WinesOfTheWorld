@@ -32,6 +32,7 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
     private ListView wineList = null;
     private WineListArrayAdapter mAdapter;
     private SearchView searchView;
+    private ArrayList<Wine> winesArrayList = wineControl.getWines();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,17 +40,11 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
 
         SearchView nameSearch = (SearchView) findViewById(R.id.searchView);
 
-        ArrayList<TextView> listViewsOfWine = new ArrayList<TextView>();
-        ArrayList<Wine> wines = wineControl.getWines();
-        ArrayList<String> names = new ArrayList<String>();
-
-        final Wine[] winesArray = new Wine[wines.size()];
-        wines.toArray(winesArray);
-
         searchView = (SearchView) findViewById(R.id.searchView);
 
         wineList = (ListView) findViewById(R.id.wineResults);
-        wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, winesArray));
+        wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, winesArrayList, Search.NAME_SEARCH_CALL ));
+        mAdapter.notifyDataSetChanged();
         wineList.setOnItemClickListener( setupAdapter() );
 
         final ActionBar actionBar = getSupportActionBar();
@@ -86,8 +81,10 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         if (TextUtils.isEmpty(newText)) {
             //wineList.clearTextFilter();
             mAdapter.getFilter().filter("");
+            mAdapter.notifyDataSetChanged();
         } else {
             mAdapter.getFilter().filter( newText );
+            mAdapter.notifyDataSetChanged();
             //wineList.addView( );
         }
         return true;
@@ -115,5 +112,11 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
             }
         };
         return listener;
+    }
+
+    public void onBackPressed(){
+        mAdapter.getFilter().filter("");
+        mAdapter.notifyDataSetChanged();
+        super.onBackPressed();
     }
 }

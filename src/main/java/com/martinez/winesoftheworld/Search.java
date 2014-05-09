@@ -27,6 +27,14 @@ public class Search extends ActionBarActivity implements ActionBar.OnNavigationL
      * current dropdown position.
      */
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+    public static final int NAME_SEARCH_CALL = 0;
+    public static final int COUNTRY_SEARCH_CALL = 1;
+    public static final int GRAPE_SEARCH_CALL = 2;
+    public static final int REGION_SEARCH_CALL= 3;
+    public static final int VINTAGE_SEARCH_CALL = 4;
+    public static final int PRICE_SEARCH_CALL = 5;
+    public static final int TASTING_NOTES_CALL = 6;
+
     private WineControl wineControl = null;
 
     @Override

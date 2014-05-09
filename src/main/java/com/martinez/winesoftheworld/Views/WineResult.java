@@ -38,7 +38,7 @@ public class WineResult extends ActionBarActivity implements ActionBar.OnNavigat
         regionText.setText( wineFromSearch.getRegion() );
         countryText.setText( wineFromSearch.getCountry() );
         priceText.setText( Double.toString( wineFromSearch.getPrice() ) );
-        vintageText.setText( wineFromSearch.getVintage() );
+       // vintageText.setText( wineFromSearch.getVintage() );
 
         // Set up the action bar to show a dropdown list.
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
