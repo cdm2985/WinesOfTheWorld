@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.martinez.winesoftheworld" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.martinez.winesoftheworld.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.Search"
+            android:parentActivityName="com.martinez.winesoftheworld.MainActivity"
+            android:label="@string/title_activity_search" >
+
+        </activity>
+        <activity android:name="com.martinez.winesoftheworld.SearchActivities.NameSearch"
+            android:label="@string/title_name"
+            android:parentActivityName="com.martinez.winesoftheworld.Search">
+            </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.CountrySearch"
+            android:label="@string/title_country"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.GrapeSearch"
+            android:label="@string/title_grape"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.VintageSearch"
+            android:label="@string/title_vintage"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.PriceSearch"
+            android:label="@string/title_price"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.RegionSearch"
+            android:label="@string/title_region"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.NotesSearch"
+            android:label="@string/title_notes"
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
+    </application>
+
+</manifest>
