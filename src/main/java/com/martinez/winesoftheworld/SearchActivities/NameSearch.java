@@ -46,7 +46,7 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         wineList = (ListView) findViewById(R.id.wineResults);
         wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, winesArrayList, Search.NAME_SEARCH_CALL ));
         mAdapter.notifyDataSetChanged();
-        wineList.setOnItemClickListener(setupAdapter());
+        wineList.setOnItemClickListener(getOnClickListener());
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
@@ -102,7 +102,7 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         searchView.setSubmitButtonEnabled(false);
     }
 
-    protected AdapterView.OnItemClickListener setupAdapter(){
+    protected AdapterView.OnItemClickListener getOnClickListener(){
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(getApplicationContext(), "Clicked on: " + ((Wine) parent.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();

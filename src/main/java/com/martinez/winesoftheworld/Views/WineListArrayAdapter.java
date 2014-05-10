@@ -112,7 +112,14 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
                 holder.subText.setText( Double.toString(wine.getPrice()));
                 break;
             case( Search.TASTING_NOTES_CALL ):
-                holder.subText.setText(wine.getTastingNotes());
+                String[] splitNotes = wine.getTastingNotes().split("\\|");
+                StringBuilder notes = new StringBuilder();
+                for(String note: splitNotes ){
+                    notes.append( note.trim().toLowerCase() );
+                    if( note.length() > 0 ) notes.append(", ");
+                }
+                String text = notes.toString();
+                holder.subText.setText(text);
                 break;
             default:
                 break;
@@ -147,66 +154,61 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
                     results.values = originalItems;
                     results.count = originalItems.size();
                 }
-            } else {
-                synchronized(mLock) {
-                    // Compare lower case strings
-                    String prefixString = prefix.toString().toLowerCase();
-                    final ArrayList<Wine> filteredItems = new ArrayList<Wine>();
-                    // Local to here so we're not changing actual array
-                    final ArrayList<Wine> localItems = new ArrayList<Wine>();
-                    localItems.addAll(originalItems);
-                    final int count = localItems.size();
+            } else synchronized (mLock) {
+                // Compare lower case strings
+                String prefixString = prefix.toString().toLowerCase();
+                final ArrayList<Wine> filteredItems = new ArrayList<Wine>();
+                // Local to here so we're not changing actual array
+                final ArrayList<Wine> localItems = new ArrayList<Wine>();
+                localItems.addAll(originalItems);
+                final int count = localItems.size();
 
-                    for (int i = 0; i < count; i++) {
-                        final Wine item = localItems.get(i);
-                        String itemDesc = "";
-                        switch( callingActivity ){
-                            case( Search.NAME_SEARCH_CALL ):
-                                itemDesc = item.getName().toLowerCase();
-                                break;
-                            case ( Search.COUNTRY_SEARCH_CALL ):
-                                itemDesc = item.getCountry().toLowerCase();
-                                break;
-                            case( Search.GRAPE_SEARCH_CALL ):
-                                itemDesc = item.getGrape().toLowerCase();
-                                break;
-                            case( Search.REGION_SEARCH_CALL ):
-                                itemDesc = item.getRegion().toLowerCase();
-                                break;
-                            case( Search.VINTAGE_SEARCH_CALL ):
-                                itemDesc = item.getRegion().toLowerCase();
-                                break;
-                            case( Search.PRICE_SEARCH_CALL ):
-                                itemDesc = Double.toString( item.getPrice() );
-                                break;
-                            case( Search.TASTING_NOTES_CALL ):
-                                itemDesc = item.getTastingNotes().toLowerCase();
-                                break;
-                            default:
-                                break;
-                        }
-
-                        // First match against the whole, non-splitted value
-                        if (itemDesc.startsWith(prefixString)) {
-                            filteredItems.add(item);
-                        } else {} /* This is option and taken from the source of ArrayAdapter
-                                final String[] words = itemName.split(" ");
-                                final int wordCount = words.length;
-
-                                for (int k = 0; k < wordCount; k++) {
-                                    if (words[k].startsWith(prefixString)) {
-                                        newItems.add(item);
-                                        break;
-                                    }
-                                }
-                            } */
+                for (int i = 0; i < count; i++) {
+                    final Wine item = localItems.get(i);
+                    String itemDesc = "";
+                    switch (callingActivity) {
+                        case (Search.NAME_SEARCH_CALL):
+                            itemDesc = item.getName().toLowerCase();
+                            break;
+                        case (Search.COUNTRY_SEARCH_CALL):
+                            itemDesc = item.getCountry().toLowerCase();
+                            break;
+                        case (Search.GRAPE_SEARCH_CALL):
+                            itemDesc = item.getGrape().toLowerCase();
+                            break;
+                        case (Search.REGION_SEARCH_CALL):
+                            itemDesc = item.getRegion().toLowerCase();
+                            break;
+                        case (Search.VINTAGE_SEARCH_CALL):
+                            itemDesc = item.getRegion().toLowerCase();
+                            break;
+                        case (Search.PRICE_SEARCH_CALL):
+                            itemDesc = Double.toString(item.getPrice());
+                            break;
+                        case (Search.TASTING_NOTES_CALL):
+                            String[] splitNotes = item.getTastingNotes().split("\\|");
+                            StringBuilder notes = new StringBuilder();
+                            for (String note : splitNotes) {
+                                notes.append(note.trim().toLowerCase());
+                                if (note.length() > 0) notes.append(", ");
+                            }
+                            System.out.println(itemDesc);
+                            itemDesc = notes.toString();
+                            break;
+                        default:
+                            break;
                     }
 
-                    // Set and return
-                    results.values = filteredItems;
-                    results.count = filteredItems.size();
-                }//end synchronized
-            }
+                    // First match against the whole, non-splitted value
+                    if (itemDesc.contains(prefixString)) {
+                        filteredItems.add(item);
+                    }
+                }
+
+                // Set and return
+                results.values = filteredItems;
+                results.count = filteredItems.size();
+            }//end synchronized
 
             return results;
         }

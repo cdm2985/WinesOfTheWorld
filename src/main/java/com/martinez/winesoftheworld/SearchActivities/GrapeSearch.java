@@ -1,5 +1,6 @@
 package com.martinez.winesoftheworld.SearchActivities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,9 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.martinez.winesoftheworld.MainActivity;
 import com.martinez.winesoftheworld.R;
+import com.martinez.winesoftheworld.Search;
+import com.martinez.winesoftheworld.Views.WineListArrayAdapter;
+import com.martinez.winesoftheworld.Views.WineResult;
 import com.martinez.winesoftheworld.wines.Wine;
 import com.martinez.winesoftheworld.wines.WineControl;
 
@@ -23,7 +28,7 @@ public class GrapeSearch extends ActionBarActivity  {
 
     private Spinner grapeType, grapesDropdown;
     private ListView wineList;
-    private ArrayAdapter<String> mAdapter;
+    private WineListArrayAdapter mAdapter;
     private WineControl wineControl = MainActivity.wineControl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +39,12 @@ public class GrapeSearch extends ActionBarActivity  {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle("Search by Grape");
 
-        //get our wines!
-        //wineControl = (WineControl) this.getIntent().getSerializableExtra( "WineControl" );
-
         //setup listview of wines
         setupSpinners();
 
         wineList = (ListView) findViewById(R.id.wineResults);
-        wineList.setAdapter(mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getAllWines()));
-
-
-
+        wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, wineControl.getWines(), Search.GRAPE_SEARCH_CALL));
+        wineList.setOnItemClickListener( getOnClickListener() );
     }
 
     private String[] getAllWines(){
@@ -85,13 +85,16 @@ public class GrapeSearch extends ActionBarActivity  {
 
         public void onItemSelected(AdapterView<?> parent, View view,
                                    int pos, long id) {
-            if( ( (String) parent.getItemAtPosition(pos)).equals("Red") ){
-                System.out.println("Red is selected");
+            if( ( (String) parent.getItemAtPosition(pos)).equals("Any")){
+                dropdownAdapter = ArrayAdapter.createFromResource(context,
+                        R.array.any_grape, android.R.layout.simple_spinner_item);
+            } else if( ( (String) parent.getItemAtPosition(pos)).equals("Red") ){
+                //System.out.println("Red is selected");
                 dropdownAdapter = ArrayAdapter.createFromResource(context,
                         R.array.red_grape_array, android.R.layout.simple_spinner_item);
                 //grapesDropdown.setAdapter( dropdownAdapter );
             } else {
-                System.out.println("Red is not selected.");
+                //System.out.println("Red is not selected.");
                 dropdownAdapter = ArrayAdapter.createFromResource(context,
                         R.array.white_grape_array, android.R.layout.simple_spinner_item);
                 //grapesDropdown.setAdapter( dropdownAdapter );
@@ -100,7 +103,7 @@ public class GrapeSearch extends ActionBarActivity  {
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            wineList.setAdapter(mAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, getAllWines()));
+            wineList.setAdapter(mAdapter = new WineListArrayAdapter(context, R.layout.wine_list_layout, wineControl.getWines(), Search.GRAPE_SEARCH_CALL));
         }
     }
 
@@ -114,23 +117,17 @@ public class GrapeSearch extends ActionBarActivity  {
 
         public void onItemSelected(AdapterView<?> parent, View view,
                                    int pos, long id) {
-
-            ArrayList<Wine> wines = wineControl.searchByGrape((String) parent.getItemAtPosition(pos));
-
-            ArrayList<String> names = new ArrayList<String>();
-
-            String[] namesArray = new String[ wines.size() ];
-            int counter = 0;
-            for( Wine wine: wines ){
-                namesArray[counter] =  wine.getName();
-                System.out.println( "Adding: " + wine.getName() );
-                counter++;
+            ArrayList<Wine> wines = null;
+            if( ((String) parent.getItemAtPosition(pos)).contains("Any") ){
+                wines = wineControl.getWines();
+            } else {
+                wines = wineControl.searchByGrape((String) parent.getItemAtPosition(pos));
             }
-            wineList.setAdapter(mAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, namesArray));
+            wineList.setAdapter(mAdapter = new WineListArrayAdapter(context, R.layout.wine_list_layout, wines, Search.GRAPE_SEARCH_CALL));
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            wineList.setAdapter(mAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, getAllWines()));
+            wineList.setAdapter(mAdapter = new WineListArrayAdapter(context, R.layout.wine_list_layout, wineControl.getWines(), Search.GRAPE_SEARCH_CALL));
         }
     }
     @Override
@@ -153,5 +150,16 @@ public class GrapeSearch extends ActionBarActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    protected AdapterView.OnItemClickListener getOnClickListener(){
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(getApplicationContext(), "Clicked on: " + ((Wine) parent.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent( getApplicationContext(), WineResult.class );
+
+                intent.putExtra( "wine", (Wine) parent.getItemAtPosition(position));
+                startActivity(intent);
+            }
+        };
+        return listener;    }
 }

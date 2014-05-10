@@ -9,8 +9,57 @@
     tools:context="com.martinez.winesoftheworld.SearchActivities.PriceSearch">
 
     <TextView
-        android:text="@string/hello_world"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Highest Price"
+        android:id="@+id/highPriceText"
+        android:layout_below="@+id/lowPriceText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Lowest Price"
+        android:id="@+id/lowPriceText"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/highPrice"
+        android:layout_marginTop="35dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/lowPrice"
+        android:layout_toRightOf="@+id/highPriceText"
+        android:layout_alignTop="@+id/lowPriceText"
+        android:layout_alignBottom="@+id/lowPriceText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:singleLine="true"
+        android:numeric="integer" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/highPrice"
+        android:layout_toRightOf="@+id/highPriceText"
+        android:layout_alignBottom="@+id/highPriceText"
+        android:layout_alignTop="@+id/highPriceText"
+        android:singleLine="true"
+        android:numeric="integer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose wines from a range of prices. Leave blank for no limit."
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/lowPriceText"
+        android:layout_alignStart="@+id/lowPriceText" />
 
 </RelativeLayout>
