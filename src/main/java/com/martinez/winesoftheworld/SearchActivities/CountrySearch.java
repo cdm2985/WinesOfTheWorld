@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.martinez.winesoftheworld.MainActivity;
 import com.martinez.winesoftheworld.R;
+import com.martinez.winesoftheworld.Search;
+import com.martinez.winesoftheworld.Views.WineListArrayAdapter;
 import com.martinez.winesoftheworld.wines.Wine;
 import com.martinez.winesoftheworld.wines.WineControl;
 
@@ -20,98 +22,48 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CountrySearch extends ActionBarActivity implements SearchView.OnQueryTextListener {
+public class CountrySearch extends NameSearch implements SearchView.OnQueryTextListener {
 
     private ListView wineList = null;
-    private ArrayAdapter<String> mAdapter;
+    private WineListArrayAdapter mAdapter;
     private SearchView searchView;
     private WineControl wineControl = MainActivity.wineControl;
+    private ArrayList<Wine> wines = wineControl.getWines();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_country_search);
+        setContentView(R.layout.activity_search);
+
+        SearchView nameSearch = (SearchView) findViewById(R.id.searchView);
+
+        searchView = (SearchView) findViewById(R.id.searchView);
+
+        wineList = (ListView) findViewById(R.id.wineResults);
+        wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, wines, Search.COUNTRY_SEARCH_CALL ));
+        mAdapter.notifyDataSetChanged();
+        wineList.setOnItemClickListener(setupAdapter());
+
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle("Search by Country");
 
-        //wineControl = (WineControl) this.getIntent().getSerializableExtra( "WineControl" );
-
-        searchView = (SearchView) findViewById(R.id.searchView);
-
-        ArrayList<TextView> listViewsOfWine = new ArrayList<TextView>();
-
-        searchView = (SearchView) findViewById(R.id.searchView);
-
-        wineList = (ListView) findViewById(R.id.wineResults);
-        wineList.setAdapter(mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getAllWines()));
         setupSearchView();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.country_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public boolean onQueryTextChange(String newText) {
-        ArrayList<Wine> wines = null;
         newText = newText.trim();
+        System.out.println( newText );
         if (TextUtils.isEmpty(newText)) {
-            wines = wineControl.getWines();
+            //wineList.clearTextFilter();
+            mAdapter.getFilter().filter("");
+            mAdapter.notifyDataSetChanged();
         } else {
-            wines = wineControl.searchByCountry( newText );
+            mAdapter.getFilter().filter( newText );
+            mAdapter.notifyDataSetChanged();
+            //wineList.addView( );
         }
-
-        ArrayList<String> names = new ArrayList<String>();
-
-        String[] namesArray = new String[ wines.size() ];
-        int counter = 0;
-        for( Wine wine: wines ){
-            namesArray[counter] =  wine.getName();
-            System.out.println( "Adding: " + wine.getName() );
-            counter++;
-        }
-        wineList.setAdapter(mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, namesArray));
         return true;
-    }
-
-    private String[] getAllWines(){
-        ArrayList<Wine> wines = wineControl.getWines();
-        String[] namesArray = new String[ wines.size() ];
-        int counter = 0;
-        for( Wine wine: wines ){
-            namesArray[counter] =  wine.getName();
-            System.out.println( "Adding: " + wine.getName() );
-            counter++;
-        }
-        return namesArray;
-}
-
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-    @TargetApi(11)
-    private void setupSearchView() {
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(this);
-        searchView.setSubmitButtonEnabled(false);
-        //searchView.set
-        //earchView.setQueryHint(getString(R.string.cheese_hunt_hint));
     }
 }

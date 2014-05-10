@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -65,6 +67,7 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
         return gi;
     }
 
+    private int lastPosition = -1;
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -114,6 +117,9 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
             default:
                 break;
         }
+        Animation animation = AnimationUtils.loadAnimation(getContext(), (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top );
+        row.startAnimation(animation);
+        lastPosition = position;
 
         return row;
     }

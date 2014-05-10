@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationSet;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -45,7 +46,7 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         wineList = (ListView) findViewById(R.id.wineResults);
         wineList.setAdapter(mAdapter = new WineListArrayAdapter(this, R.layout.wine_list_layout, winesArrayList, Search.NAME_SEARCH_CALL ));
         mAdapter.notifyDataSetChanged();
-        wineList.setOnItemClickListener( setupAdapter() );
+        wineList.setOnItemClickListener(setupAdapter());
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
@@ -78,6 +79,7 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
 
     public boolean onQueryTextChange(String newText) {
         newText = newText.trim();
+        System.out.println( newText );
         if (TextUtils.isEmpty(newText)) {
             //wineList.clearTextFilter();
             mAdapter.getFilter().filter("");
@@ -94,13 +96,13 @@ public class NameSearch extends ActionBarActivity implements SearchView.OnQueryT
         return false;
     }
     @TargetApi(11)
-    private void setupSearchView() {
+    protected void setupSearchView() {
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
     }
 
-    private AdapterView.OnItemClickListener setupAdapter(){
+    protected AdapterView.OnItemClickListener setupAdapter(){
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(getApplicationContext(), "Clicked on: " + ((Wine) parent.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
