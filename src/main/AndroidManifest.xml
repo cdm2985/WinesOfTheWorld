@@ -59,7 +59,12 @@
         <activity android:name=".Views.WineResult"
             android:label="Wine Details"
             android:parentActivityName="com.martinez.winesoftheworld.Search" >
-            </activity>
+        </activity>
+        <activity android:name=".OtherActivities.Favorites"
+            android:label="Favorites"
+            android:parentActivityName=".MainActivity"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.martinez.winesoftheworld.OtherActivities.Favorites;
 import com.martinez.winesoftheworld.wines.WineControl;
 
 public class MainActivity extends ActionBarActivity {
@@ -50,6 +52,11 @@ public class MainActivity extends ActionBarActivity {
     public void searchWines(View view){
         Intent intent = new Intent( this, Search.class );
         intent.putExtra( "WineControl", wineControl );
+        startActivity(intent);
+    }
+
+    public void seeFavorites(View view){
+        Intent intent = new Intent( this, Favorites.class );
         startActivity(intent);
     }
 }

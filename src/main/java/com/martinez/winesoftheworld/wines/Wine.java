@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Wine implements Serializable  {
 	private String name = "";
-	private int vintage;
+	private int vintage = 0;
 	//private String producerName = "";
 	private double price = 0.0;
 	private String region = "";

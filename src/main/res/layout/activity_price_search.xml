@@ -8,58 +8,93 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.martinez.winesoftheworld.SearchActivities.PriceSearch">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Highest Price"
-        android:id="@+id/highPriceText"
-        android:layout_below="@+id/lowPriceText" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/wineResults">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lowest Price"
-        android:id="@+id/lowPriceText"
-        android:layout_below="@+id/textView"
-        android:layout_toLeftOf="@+id/highPrice"
-        android:layout_marginTop="35dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Choose wines from a range of prices. Leave blank for no limit."
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/lowPrice"
-        android:layout_toRightOf="@+id/highPriceText"
-        android:layout_alignTop="@+id/lowPriceText"
-        android:layout_alignBottom="@+id/lowPriceText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:singleLine="true"
-        android:numeric="integer" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="43dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/highPrice"
-        android:layout_toRightOf="@+id/highPriceText"
-        android:layout_alignBottom="@+id/highPriceText"
-        android:layout_alignTop="@+id/highPriceText"
-        android:singleLine="true"
-        android:numeric="integer" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/lowPrice"
+                android:singleLine="false"
+                android:textSize="15sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/lowPriceText"
+                android:inputType="numberDecimal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose wines from a range of prices. Leave blank for no limit."
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/lowPriceText"
-        android:layout_alignStart="@+id/lowPriceText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Lowest Price"
+                android:id="@+id/lowPriceText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/highPrice"
+                android:singleLine="false"
+                android:layout_toRightOf="@+id/highPriceText"
+                android:textSize="15dp"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Highest Price"
+                android:id="@+id/highPriceText"
+                android:layout_below="@+id/lowPriceText"
+                android:layout_alignBottom="@+id/highPrice"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wineResults"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:clipToPadding="false"
+            android:clickable="true"
+            android:stackFromBottom="false"
+            android:background="#ffffffff"
+            android:headerDividersEnabled="false"
+            android:visibility="visible"
+            android:drawSelectorOnTop="false"
+            android:divider="@android:color/background_light" />
+    </LinearLayout>
 
 </RelativeLayout>

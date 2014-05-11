@@ -99,42 +99,37 @@ public class WineControl implements Serializable {
 		return searchedWines;
 	}
 
-    public ArrayList<Wine> searchByVintage(  Integer lowVintage, Integer highVintage ){
+    public ArrayList<Wine> searchByVintage(  int lowVintage, int highVintage ){
         ArrayList<Wine> searchedWines = new ArrayList<Wine>();
 
-        if( lowVintage != null && highVintage != null ){
-            for( Wine wine: wines ){
+        for( Wine wine: wines ){
+            if( lowVintage != 0 && highVintage != 0 ){
                 if( wine.getVintage() >= lowVintage && wine.getVintage() <= highVintage ){
                     searchedWines.add( wine );
                 }
-            }
-        } else if (lowVintage == null ){
-            for( Wine wine: wines ){
+            } else if (lowVintage == 0 ){
                 if( wine.getVintage() <= highVintage ){
                     searchedWines.add( wine );
                 }
-            }
-        } else if ( highVintage == null ){
-            for( Wine wine: wines ){
+            } else if ( highVintage == 0 ){
                 if( wine.getVintage() >= lowVintage ){
                     searchedWines.add( wine );
                 }
             }
         }
 
-
         return searchedWines;
     }
 
-    public ArrayList<Wine> searchByPrice(  Double lowerPrice, Double higherPrice ){
+    public ArrayList<Wine> searchByPrice(  double lowerPrice, double higherPrice ){
 		ArrayList<Wine> searchedWines = new ArrayList<Wine>();
 		
 		for( Wine wine: wines ){
-			if( lowerPrice == null ){
+			if( lowerPrice == 0.0 ){
 				if( wine.getPrice() <= higherPrice ){
 					searchedWines.add(wine);
 				}
-			} else if ( higherPrice == null ){
+			} else if ( higherPrice == 0.0 ){
 				if( wine.getPrice() >= lowerPrice ){
 					searchedWines.add(wine);
 				}
@@ -210,6 +205,11 @@ public class WineControl implements Serializable {
     }
 
     public ArrayList<Wine> getWines(){
+        ArrayList<Wine> wines = new ArrayList<Wine>();
+
+
+        wines = (ArrayList<Wine>)this.wines.clone();
+
         return wines;
     }
 }

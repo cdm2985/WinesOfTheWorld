@@ -106,7 +106,8 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
                 holder.subText.setText(wine.getRegion());
                 break;
             case( Search.VINTAGE_SEARCH_CALL ):
-                holder.subText.setText(wine.getVintage());
+                System.out.println( wine.getVintage());
+                holder.subText.setText(Integer.toString(wine.getVintage()));
                 break;
             case( Search.PRICE_SEARCH_CALL ):
                 holder.subText.setText( Double.toString(wine.getPrice()));
@@ -188,9 +189,11 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
                         case (Search.TASTING_NOTES_CALL):
                             String[] splitNotes = item.getTastingNotes().split("\\|");
                             StringBuilder notes = new StringBuilder();
+                            int counter = 0;
                             for (String note : splitNotes) {
+                                if( counter != 0 )
+                                    notes.append(", ");
                                 notes.append(note.trim().toLowerCase());
-                                if (note.length() > 0) notes.append(", ");
                             }
                             System.out.println(itemDesc);
                             itemDesc = notes.toString();
