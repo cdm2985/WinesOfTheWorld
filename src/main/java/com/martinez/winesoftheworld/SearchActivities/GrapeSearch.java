@@ -153,13 +153,12 @@ public class GrapeSearch extends ActionBarActivity  {
     protected AdapterView.OnItemClickListener getOnClickListener(){
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Clicked on: " + ((Wine) parent.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent( getApplicationContext(), WineResult.class );
 
                 intent.putExtra( "wine", (Wine) parent.getItemAtPosition(position));
                 startActivity(intent);
             }
         };
-        return listener;    }
+        return listener;
+    }
 }

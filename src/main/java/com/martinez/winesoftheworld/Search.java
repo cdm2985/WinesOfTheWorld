@@ -34,6 +34,7 @@ public class Search extends ActionBarActivity implements ActionBar.OnNavigationL
     public static final int VINTAGE_SEARCH_CALL = 4;
     public static final int PRICE_SEARCH_CALL = 5;
     public static final int TASTING_NOTES_CALL = 6;
+    public static final int FAVORITES_SEARCH_CALL = 7;
 
     private WineControl wineControl = null;
 

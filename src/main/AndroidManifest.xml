@@ -62,8 +62,7 @@
         </activity>
         <activity android:name=".OtherActivities.Favorites"
             android:label="Favorites"
-            android:parentActivityName=".MainActivity"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:parentActivityName=".MainActivity" >
         </activity>
     </application>
 

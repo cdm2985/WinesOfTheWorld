@@ -4,12 +4,12 @@
         xmlns:winesOfTheWorld="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search"
         android:title="Search Favorites"
-        android:icon="@android:drawable/ic_menu_search"
-        winesOfTheWorld:showAsAction="collapseActionView|ifRoom"
+        android:icon="@drawable/ic_action_search"
+        winesOfTheWorld:showAsAction="collapseActionView|always"
         android:actionViewClass="android.widget.SearchView" />
     <item android:id="@+id/add"
         android:title="Add Wine"
-        android:icon="@android:drawable/ic_menu_add"
-        winesOfTheWorld:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_new"
+        winesOfTheWorld:showAsAction="always"
         />
 </menu>

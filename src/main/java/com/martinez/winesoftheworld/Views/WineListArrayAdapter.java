@@ -122,6 +122,9 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
                 String text = notes.toString();
                 holder.subText.setText(text);
                 break;
+            case( Search.FAVORITES_SEARCH_CALL ):
+                holder.subText.setText(wine.getGrape());
+                break;
             default:
                 break;
         }
@@ -152,8 +155,19 @@ public class WineListArrayAdapter extends ArrayAdapter<Wine> {
             // No prefix is sent to filter by so we're going to send back the original array
             if (prefix == null || prefix.length() == 0) {
                 synchronized (mLock) {
-                    results.values = originalItems;
-                    results.count = originalItems.size();
+                    if( callingActivity == Search.FAVORITES_SEARCH_CALL){
+                        ArrayList<Wine> favoriteWines = new ArrayList<Wine>();
+                        for( Wine wine: originalItems ){
+                            if( wine.isFavorite() ){
+                                favoriteWines.add( wine );
+                            }
+                        }
+                        results.values = favoriteWines;
+                        results.count = favoriteWines.size();
+                    } else {
+                        results.values = originalItems;
+                        results.count = originalItems.size();
+                    }
                 }
             } else synchronized (mLock) {
                 // Compare lower case strings
