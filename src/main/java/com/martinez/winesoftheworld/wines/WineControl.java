@@ -34,7 +34,12 @@ public class WineControl implements Serializable {
 				String price = explodedLine[4].trim();
 				String region = explodedLine[5].trim();
 				String country = explodedLine[6].trim();
-				String abv = explodedLine[7].trim();
+                String abv = "";
+                try{
+				    abv = explodedLine[7].trim();
+                } catch (Exception e){
+                    abv = "0";
+                }
                 String notes = "";
                 String favorite = "";
                 try{
@@ -64,6 +69,7 @@ public class WineControl implements Serializable {
 				wine.setCountry(country);
 				wine.setAbv( Double.parseDouble(abv));
 				wine.setTastingNotes( notes );
+
 				wines.add(wine);
 				counter++;
 			}
