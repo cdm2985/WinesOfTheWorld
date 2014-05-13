@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameOfWine"
+        android:singleLine="false"
+        android:paddingTop="30dp"
+        android:hint="Name of Wine" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Spinner
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/grapeTypeDropdown"
+        android:spinnerMode="dropdown"
+        android:layout_alignParentEnd="false" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/grapesDropdown"
+        android:spinnerMode="dropdown"
+        android:layout_toRightOf="@+id/grapeTypeDropdown" />
+</RelativeLayout>
+
+    <EditText
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameOfRegion"
+        android:paddingTop="10dp"
+        android:hint="Region" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameOfCountry"
+        android:paddingTop="20dp"
+        android:hint="Country" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/priceInput"
+        android:paddingTop="20dp"
+        android:hint="Price" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/vintageInput"
+        android:paddingTop="20dp"
+        android:hint="Vintage" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notesInput"
+        android:paddingTop="30dp"
+        android:hint="Tasting Notes" />
+</LinearLayout>

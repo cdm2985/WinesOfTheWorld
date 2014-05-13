@@ -64,6 +64,10 @@
             android:label="Favorites"
             android:parentActivityName=".MainActivity" >
         </activity>
+        <activity android:name=".OtherActivities.AddWine"
+            android:label="Add Wine"
+            android:parentActivityName=".OtherActivities.Favorites">
+         </activity>
     </application>
 
 </manifest>

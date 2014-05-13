@@ -47,6 +47,12 @@
         <item>Rose</item>
         <item>Fortified</item>
     </string-array>
+    <string-array name="grape_types_no_any">
+        <item>Red</item>
+        <item>White</item>
+        <item>Rose</item>
+        <item>Fortified</item>
+    </string-array>
     <string-array name="any_grape">
         <item>Any</item>
     </string-array>

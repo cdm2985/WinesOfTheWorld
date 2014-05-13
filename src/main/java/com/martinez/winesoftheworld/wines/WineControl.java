@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class WineControl implements Serializable {
 
     ArrayList<Wine> wines = new ArrayList<Wine>();
+    ArrayList<Wine> personalWines = new ArrayList<Wine>();
 
     public WineControl( InputStream fis ){
 		try{
@@ -213,9 +214,22 @@ public class WineControl implements Serializable {
     public ArrayList<Wine> getWines(){
         ArrayList<Wine> wines = new ArrayList<Wine>();
 
-
         wines = (ArrayList<Wine>)this.wines.clone();
+        wines.addAll( getPersonalWines() );
 
         return wines;
+    }
+
+    public ArrayList<Wine> getPersonalWines(){
+        ArrayList<Wine> wines = new ArrayList<Wine>();
+
+        wines = (ArrayList<Wine>)this.personalWines.clone();
+
+        return wines;
+    }
+
+    public void addWineToPersonalList( Wine wine ){
+        personalWines.add( wine );
+        wines.add(wine);
     }
 }

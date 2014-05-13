@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -110,5 +111,28 @@ public class Favorites extends ActionBarActivity {
             wineResults.setVisibility(View.VISIBLE);
             favoriteText.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.search:
+                searchWines();
+                return true;
+            case R.id.addWine:
+                addWine();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void searchWines(){
+
+    }
+
+    private void addWine(){
+        Intent intent = new Intent( getApplicationContext(), AddWine.class );
+        startActivity(intent);
     }
 }
