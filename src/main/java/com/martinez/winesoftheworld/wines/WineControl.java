@@ -230,6 +230,6 @@ public class WineControl implements Serializable {
 
     public void addWineToPersonalList( Wine wine ){
         personalWines.add( wine );
-        wines.add(wine);
+        //wines.add(wine);
     }
 }

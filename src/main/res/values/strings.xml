@@ -19,6 +19,7 @@
     <string name="title_activity_region_search">RegionSearch</string>
     <string name="title_activity_notes_search">NotesSearch</string>
     <string name="countryOfOrigin">Country of Origin</string>
+
     <string-array name="white_grape_array">
         <item>Chardonnay</item>
         <item>Gewurztraminer</item>
@@ -56,4 +57,7 @@
     <string-array name="any_grape">
         <item>Any</item>
     </string-array>
+
+    <string name="title_activity_explore">Explore</string>
+
 </resources>

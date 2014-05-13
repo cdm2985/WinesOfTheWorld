@@ -88,13 +88,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:clipToPadding="false"
-            android:clickable="true"
+            android:clickable="false"
             android:stackFromBottom="false"
-            android:background="#ffffffff"
             android:headerDividersEnabled="false"
             android:visibility="visible"
             android:drawSelectorOnTop="false"
-            android:divider="@android:color/background_light" />
+            android:dividerHeight="10.0sp"
+            android:divider="#00ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

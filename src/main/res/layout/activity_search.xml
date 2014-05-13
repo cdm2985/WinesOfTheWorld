@@ -29,11 +29,9 @@
         android:clipToPadding="false"
         android:clickable="true"
         android:stackFromBottom="false"
-        android:background="#ffffffff"
         android:headerDividersEnabled="false"
         android:visibility="visible"
         android:drawSelectorOnTop="false"
-        android:layout_marginBottom="10dp"
         android:dividerHeight="10.0sp"
         android:divider="#00ffffff"
         android:footerDividersEnabled="false" />

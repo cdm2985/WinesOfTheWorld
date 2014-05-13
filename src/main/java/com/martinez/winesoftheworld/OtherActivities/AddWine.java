@@ -77,6 +77,11 @@ public class AddWine extends ActionBarActivity {
             return;
         }
 
+        if( wineControl.searchByName(nameOfWine.getText().toString()).size() > 0){
+            Toast.makeText(getApplicationContext(), "Wine already exists!", Toast.LENGTH_SHORT ).show();
+            return;
+        }
+
         Wine wine = null;
         try{
             String _grape = (String) grapeType.getSelectedItem();
@@ -97,6 +102,7 @@ public class AddWine extends ActionBarActivity {
 
             MainActivity.wineControl.addWineToPersonalList( wine );
             Toast.makeText(getApplicationContext(), "Added your new wine: " + wine.getName() + "!", Toast.LENGTH_SHORT ).show();
+            super.finish();
         } catch (Exception e){
             Toast.makeText(getApplicationContext(), "Failed to add wine, check your input!", Toast.LENGTH_SHORT ).show();
 

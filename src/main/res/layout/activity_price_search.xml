@@ -12,7 +12,8 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/wineResults">
+        android:layout_above="@+id/wineResults"
+        android:clickable="false">
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,11 +91,11 @@
             android:clipToPadding="false"
             android:clickable="true"
             android:stackFromBottom="false"
-            android:background="#ffffffff"
             android:headerDividersEnabled="false"
             android:visibility="visible"
             android:drawSelectorOnTop="false"
-            android:divider="@android:color/background_light" />
+            android:dividerHeight="10.0sp"
+            android:divider="#00ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

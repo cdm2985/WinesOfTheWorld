@@ -18,14 +18,14 @@
         </activity>
         <activity
             android:name="com.martinez.winesoftheworld.Search"
-            android:parentActivityName="com.martinez.winesoftheworld.MainActivity"
-            android:label="@string/title_activity_search" >
-
+            android:label="@string/title_activity_search"
+            android:parentActivityName="com.martinez.winesoftheworld.MainActivity" >
         </activity>
-        <activity android:name="com.martinez.winesoftheworld.SearchActivities.NameSearch"
+        <activity
+            android:name="com.martinez.winesoftheworld.SearchActivities.NameSearch"
             android:label="@string/title_name"
-            android:parentActivityName="com.martinez.winesoftheworld.Search">
-            </activity>
+            android:parentActivityName="com.martinez.winesoftheworld.Search" >
+        </activity>
         <activity
             android:name="com.martinez.winesoftheworld.SearchActivities.CountrySearch"
             android:label="@string/title_country"
@@ -56,18 +56,29 @@
             android:label="@string/title_notes"
             android:parentActivityName="com.martinez.winesoftheworld.Search" >
         </activity>
-        <activity android:name=".Views.WineResult"
+        <activity
+            android:name="com.martinez.winesoftheworld.Views.WineResult"
             android:label="Wine Details"
             android:parentActivityName="com.martinez.winesoftheworld.Search" >
         </activity>
-        <activity android:name=".OtherActivities.Favorites"
+        <activity
+            android:name="com.martinez.winesoftheworld.OtherActivities.Favorites"
             android:label="Favorites"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="com.martinez.winesoftheworld.MainActivity" >
         </activity>
-        <activity android:name=".OtherActivities.AddWine"
+        <activity
+            android:name="com.martinez.winesoftheworld.OtherActivities.AddWine"
             android:label="Add Wine"
-            android:parentActivityName=".OtherActivities.Favorites">
-         </activity>
+            android:parentActivityName="com.martinez.winesoftheworld.OtherActivities.Favorites" >
+        </activity>
+        <activity
+            android:name="com.martinez.winesoftheworld.OtherActivities.Explore"
+            android:label="@string/title_activity_explore"
+            android:parentActivityName="com.martinez.winesoftheworld.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martinez.winesoftheworld.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -42,8 +42,8 @@
         android:id="@+id/wineResults"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:dividerHeight="20dp"
         android:clickable="true"
         android:layout_below="@+id/grapesDropdown"
-        android:divider="@android:color/background_light" />
+        android:dividerHeight="10.0sp"
+        android:divider="#00ffffff" />
 </RelativeLayout>
